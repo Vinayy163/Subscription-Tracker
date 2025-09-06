@@ -1,47 +1,229 @@
+/* ================================
+   🌐 Global Styles
+================================ */
 body {
-  font-family: Arial, sans-serif;
-  background: #f9f9f9;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #333333;  /* fallback */
+  background: -webkit-linear-gradient(to right, #dd1818, #333333);
+  background: linear-gradient(to right, #dd1818, #333333);
+  margin: 0;
+  padding: 0;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  color: #f5f5f5;
 }
 
+h2, h3 {
+  margin-bottom: 20px;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ================================
+   📦 Card Container
+================================ */
 .container {
-  background: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  width: 350px;
-  text-align: center;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-}
-
-input, button {
+  background: #1e1e1e;
+  padding: 30px;
+  border-radius: 15px;
   width: 90%;
-  padding: 10px;
-  margin: 8px 0;
-  border: 1px solid #ddd;
-  border-radius: 5px;
+  max-width: 480px;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  animation: fadeIn 0.6s ease-in-out;
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================================
+   📝 Form Elements
+================================ */
+.form-card {
+  display: grid;
+  gap: 15px;
+  text-align: left;
+}
+
+.form-group label {
+  font-size: 14px;
+  margin-bottom: 5px;
+  display: block;
+  color: #ddd;
+}
+
+input, select {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin: 6px 0;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #2b2b2b;
+  color: #f5f5f5;
+  font-size: 14px;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+input::placeholder {
+  color: #aaa;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #dd1818;
+}
+
+/* ================================
+   🔘 Buttons
+================================ */
 button {
-  background: #007bff;
-  color: white;
+  display: inline-block;
+  padding: 10px 16px;
   border: none;
+  border-radius: 8px;
   cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background 0.3s, transform 0.2s;
 }
 
-button:hover {
-  background: #0056b3;
+.primary-btn {
+  width: 100%;
+  background: #dd1818;
+  color: #fff;
+  font-weight: 600;
+  padding: 12px;
 }
 
-#subscriptionList {
+.primary-btn:hover {
+  background: #a01212;
+  transform: translateY(-2px);
+}
+
+.logout-btn {
+  background: #444;
+  color: #fff;
+  font-size: 13px;
+  padding: 6px 12px;
+}
+
+.logout-btn:hover {
+  background: #666;
+}
+
+/* ================================
+   🔗 Links
+================================ */
+a {
+  color: #dd1818;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ================================
+   ⚠️ Messages
+================================ */
+#loginMessage, #signupMessage {
+  margin-top: 10px;
+  color: #ff6666;
+  font-size: 14px;
+  text-align: center;
+}
+
+/* ================================
+   📋 Subscription List
+================================ */
+#subscriptionList, #allSubscriptions {
   list-style: none;
   padding: 0;
   margin-top: 20px;
+  display: grid;
+  gap: 15px;
 }
 
-#subscriptionList li {
-  padding: 10px;
-  border-bottom: 1px solid #eee;
+#subscriptionList li, #allSubscriptions li {
+  background: #2b2b2b;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  font-size: 14px;
+  line-height: 1.6;
+  color: #f0f0f0;
+}
+
+#subscriptionList li strong, #allSubscriptions li strong {
+  font-size: 16px;
+  color: #dd1818;
+}
+
+/* Subscription action buttons */
+.subscription-actions {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+.subscription-actions button {
+  flex: 1;
+  font-size: 13px;
+  background: #444;
+  color: #fff;
+  padding: 8px;
+  border-radius: 6px;
+}
+
+.subscription-actions button:hover {
+  background: #dd1818;
+}
+
+/* Status colors */
+.status.active { color: #4CAF50; font-weight: bold; }
+.status.cancelled { color: #ff9800; font-weight: bold; }
+.status.expired { color: #f44336; font-weight: bold; }
+
+/* ================================
+   🏷️ Header Actions
+================================ */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+/* ================================
+   🔔 Toast Notifications
+================================ */
+.toast {
+  visibility: hidden;
+  min-width: 250px;
+  margin-left: -125px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  padding: 12px;
+  position: fixed;
+  z-index: 1000;
+  left: 50%;
+  bottom: 30px;
+  font-size: 14px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+  opacity: 0;
+  transition: visibility 0s, opacity 0.5s ease-in-out;
+}
+
+.toast.show {
+  visibility: visible;
+  opacity: 1;
 }

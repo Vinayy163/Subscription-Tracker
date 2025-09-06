@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>View Subscriptions</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container wide">
+    <div class="header">
+      <h2>Your Subscriptions</h2>
+      <div class="header-actions">
+        <button class="secondary-btn" onclick="window.location.href='dashboard.html'">← Back to Dashboard</button>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </div>
+    </div>
+
+    <ul id="allSubscriptions"></ul>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", async () => {
+      await loadAllSubscriptions();
+    });
+
+    async function loadAllSubscriptions() {
+      const token = localStorage.getItem("token");
+      const userId = localStorage.getItem("userId");
+      const list = document.getElementById("allSubscriptions");
+
+      try {
+        const res = await fetch(`${SERVER_URL}/api/v1/subscriptions/user/${userId}`, {
+          headers: { Authorization: `Bearer ${token}` }
+        });
+
+        const data = await res.json();
+        if (res.ok && Array.isArray(data.data)) {
+          list.innerHTML = data.data.map(sub => {
+            const renewalDate = new Date(sub.renewalDate).toLocaleDateString();
+            return `
+              <li>
+                <strong>${sub.name}</strong>
+                <p>Price: ${sub.price} ${sub.currency}</p>
+                <p>⏳  ${sub.frequency}</p>
+                <p>Status: <span class="status ${sub.status}">${sub.status}</span></p>
+                <p>🔄 Renewal Date: ${renewalDate}</p>
+                <div class="subscription-actions">
+                  <button onclick="deleteSubscription('${sub._id}')">🗑 Delete</button>
+                  <button onclick="cancelSubscription('${sub._id}')">✖ Cancel</button>
+                </div>
+              </li>
+            `;
+          }).join("");
+        } else {
+          list.innerHTML = `<li>${data.message || "No subscriptions found"}</li>`;
+        }
+      } catch (err) {
+        console.error("Load subscriptions error:", err);
+      }
+    }
+
+    async function deleteSubscription(id) {
+      const token = localStorage.getItem("token");
+      try {
+        const res = await fetch(`${SERVER_URL}/api/v1/subscriptions/${id}`, {
+          method: "DELETE",
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        if (res.ok) {
+          alert("✅ Subscription deleted!");
+          loadAllSubscriptions();
+        }
+      } catch (err) {
+        console.error("Delete error:", err);
+      }
+    }
+
+    async function cancelSubscription(id) {
+      const token = localStorage.getItem("token");
+      try {
+        const res = await fetch(`${SERVER_URL}/api/v1/subscriptions/${id}/cancel`, {
+          method: "PUT",
+          headers: { Authorization: `Bearer ${token}` }
+        });
+        if (res.ok) {
+          alert("⚠️ Subscription cancelled!");
+          loadAllSubscriptions();
+        }
+      } catch (err) {
+        console.error("Cancel error:", err);
+      }
+    }
+  </script>
+</body>
+</html>
