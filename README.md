@@ -1,16 +1,4 @@
 
-## 📋 <a name="table">Table of Contents</a>
-
-1. 🤖 [Introduction](#introduction)
-2. ⚙️ [Tech Stack](#tech-stack)
-3. 🔋 [Features](#features)
-4. 🤸 [Quick Start](#quick-start)
-5. 🕸️ [Snippets (Code to Copy)](#snippets)
-6. 🔗 [Assets](#links)
-7. 🚀 [More](#more)
-
-
-
 ## <a name="introduction">🤖 Introduction</a>
 
 Build a **production-ready Subscription Management System API** that handles **real users, real money, and real business logic**.  
@@ -56,7 +44,6 @@ npx @upstash/qstash-cli dev
 
 Open [http://localhost:5500](http://localhost:5500) in your browser or any HTTP client to test the project.
 
-## <a name="snippets">🕸️ Snippets</a>
 
 ## <a name="links">🔗 Links</a>
 
