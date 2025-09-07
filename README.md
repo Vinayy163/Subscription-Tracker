@@ -74,7 +74,8 @@ This project is built with a **Node.js + Express + MongoDB backend** and a **Van
 
 
 * **Dashboard** – Add new subscriptions
-![Dashboard](screenshots/dashboard1.png)  
+![Dashboard](screenshots/dashboard1.png)
+
 ![Dashboard](screenshots/dashboard2.png)  
 
 * **Subscriptions Page** – View, edit, cancel, delete
@@ -92,6 +93,35 @@ This project is built with a **Node.js + Express + MongoDB backend** and a **Van
 # Clone the repository
 git clone https://github.com/Vinayy163/subscription-tracker.git
 
+Set Up Environment Variables
+
+Create a new file named .env.local in the root of your project and add the following content:
+
+# PORT
+PORT=5500
+SERVER_URL="http://localhost:5500"
+
+# ENVIRONMENT
+NODE_ENV=development
+
+# DATABASE
+DB_URI=
+
+# JWT AUTH
+JWT_SECRET=
+JWT_EXPIRES_IN="1d"
+
+# ARCJET
+ARCJET_KEY=
+ARCJET_ENV="development"
+
+# UPSTASH
+QSTASH_URL=http://127.0.0.1:8080
+QSTASH_TOKEN=
+
+# NODEMAILER
+EMAIL_PASSWORD=
+
 # Install backend dependencies
 cd Backend
 npm install
@@ -105,7 +135,7 @@ cd ../Frontend
 # Open index.html in browser (or use Live Server in VS Code)
 ```
 
-
+---
 
 ## <a name="links">🔗 Links</a>
 
