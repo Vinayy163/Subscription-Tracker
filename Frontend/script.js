@@ -102,14 +102,14 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Response:", data);
 
         if (res.ok) {
-          showToast("✅ Subscription added successfully!", true);
+          alert("✅ Subscription added successfully!", true);
           subscriptionForm.reset();
         } else {
-          showToast("❌ Failed to add subscription", false);
+          alert("❌ Failed to add subscription", false);
         }
       } catch (err) {
         console.error("Add subscription error:", err);
-        showToast("❌ Failed to add subscription", false);
+        alert("❌ Failed to add subscription", false);
       }
     });
   }
@@ -122,12 +122,4 @@ function logout() {
   window.location.href = "index.html";
 }
 
-function showToast(message, success = true) {
-  const toast = document.getElementById("toast");
-  toast.innerText = message;
-  toast.style.backgroundColor = success ? "#4CAF50" : "#f44336"; // green or red
-  toast.className = "toast show";
-  setTimeout(() => {
-    toast.className = "toast"; // hide after 3s
-  }, 3000);
-}
+
